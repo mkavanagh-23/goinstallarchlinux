@@ -2,7 +2,6 @@ package app
 
 import(
 	"fmt"
-
 )
 
 type DistributionType uint8

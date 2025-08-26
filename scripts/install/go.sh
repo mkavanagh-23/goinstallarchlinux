@@ -20,6 +20,7 @@ go_install() {
 }
 
 go_build() {
+    # Clone the git repo
     # Enter project root
     # buold the executable
     echo "Building installer program..."

@@ -18,7 +18,11 @@ install() {
             return 1
         fi
     fi
+
+    # Install git
     # Install Go
+    # Install installer
+    # Run installer
 
     return
 }

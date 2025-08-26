@@ -8,8 +8,6 @@ import (
 	"github.com/mkavanagh-23/goinstallarchlinux/internal/app"
 )
 
-var state app.ProgramState
-
 func main() {
 	// Check for valid arguments
 	if len(os.Args) != 3 {
@@ -21,7 +19,8 @@ func main() {
 	installStage := os.Args[2]
 	fmt.Printf("Install stage: %s\n", installStage)
 
-	// Extract the state
+	// Extract the state to an object
+	var state app.ProgramState
 	switch distroType {
 	case "vanilla":
 		state.Distribution = app.ArchVanilla
@@ -41,8 +40,14 @@ func main() {
 		return
 	}
 
-	// Run the program from the current state
+	// Run the program for the given state
 	app.ProgramRun(state)
+
+
+
+
+
+
 
 	/******* DEBUG TESTING BELOW *******/
 	// Test generation of different menu types
@@ -69,4 +74,5 @@ func main() {
 			fmt.Println("-", value)
 		}
 	}
+	/******** END DEBUG TESTNG ********/
 }
