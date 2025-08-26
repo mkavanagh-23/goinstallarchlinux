@@ -41,7 +41,7 @@ main() {
       ;;
       *)
         echo "=== UNSUPPORTED INSTALLATION DETECTED ==="
-        echo "Please exit and re-run the script from an Arch Linux machine."
+        echo "Please exit and re-run the script from a bare metal Arch Linux environment."
         install "vanilla"
       ;;
     esac

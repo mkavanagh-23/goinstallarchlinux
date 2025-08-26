@@ -7,6 +7,10 @@ detect_environment() {
     if [ -f /etc/os-release ]; then
         . /etc/os-release
         if [ "${ID,,}" = "arch" ]; then
+            if systemd-detect-virt -q; then
+                echo "virtualized"
+                return
+            fi
             # check if we are on the install usb
             if [[ -d "/run/archiso" ]]; then
                 echo "installer"
