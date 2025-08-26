@@ -31,9 +31,22 @@ wifi_check() {
     fi
 }
 
-wifi_connect() {
+wifi_connect_iwd() {
     if wifi_check; then
         echo "running iwctl"
+        check_network
+        status=$?
+        if status; then
+            echo "✅ WiFi successfully connected!"
+            return 0
+        fi
+    fi
+    return 1
+}
+
+wifi_connect_nm() {
+    if wifi_check; then
+        echo "running Network Manager CLI"
         check_network
         status=$?
         if status; then
