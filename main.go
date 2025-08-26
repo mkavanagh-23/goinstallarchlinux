@@ -10,8 +10,11 @@ func main() {
 	menuChoices := []string{"Choice 1", "Choice 2", "Choice 3"}
 	choice := ui.ShowSimpleMenu(menuChoices)
 	if choice != "" {
-		fmt.Printf("What?")
+		fmt.Printf("Your choice: %s\n", choice)
 	} else {
-		fmt.Printf("Correct")
+		fmt.Println("No choice selected")
 	}
+
+	multiChoice := ui.ShowMultiMenu(menuChoices)
+	fmt.Printf("Your choices: %v\n", multiChoice)
 }
