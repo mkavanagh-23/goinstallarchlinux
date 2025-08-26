@@ -14,11 +14,11 @@ main() {
         case "$t2_status" in
           "t2")
             echo "=== T2 LINUX DETECTED ==="
-            install_t2
+            install "t2"
           ;;
           *)
             echo "=== VANILLA ARCH DETECTED ==="
-            install_vanila
+            install "vanilla"
           ;;
         esac
       ;;
@@ -39,6 +39,7 @@ main() {
       *)
         echo "=== UNSUPPORTED INSTALLATION DETECTED ==="
         echo "Please exit and re-run the script from an Arch Linux machine."
+        install "vanilla"
       ;;
     esac
 }

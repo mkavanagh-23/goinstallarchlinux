@@ -56,3 +56,41 @@ wifi_connect_nm() {
     fi
     return 1
 }
+
+net_install_vanilla() {
+    check_network
+    status=$?
+    if [ $status -eq 1 ]; then
+        echo "'archlinux.org' inaccessible. Please try again later."
+        return 1
+    else
+        if [ $status -eq 2 ]; then
+            echo "Attempting to connect to WiFi via iwd"
+            if ! wifi_connect_iwd; then
+                echo "Failed to connect to the network. Please connect and then re-run the script"
+                return 1
+            fi
+        fi 
+    fi
+
+    return 0
+}
+
+net_install_t2() {
+    check_network
+    status=$?
+    if [ $status -eq 1 ]; then
+        echo "'archlinux.org' inaccessible. Please try again later."
+        return 1
+    else
+        if [ $status -eq 2 ]; then
+            echo "Attempting to connect to WiFi via nmcli"
+            if ! wifi_connect_nm; then
+                echo "Failed to connect to the network. Please connect and then re-run the script"
+                return 1
+            fi
+        fi
+    fi
+
+    return 0
+}

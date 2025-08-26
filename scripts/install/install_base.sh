@@ -9,51 +9,16 @@ install() {
     fi
     local installType="$1" # vanilla|t2
 
+    if [[ "$installType" == "t2" ]]; then
+        if ! net_install_t2; then
+            return 1
+        fi
+    else
+        if ! net_install_vanilla; then
+            return 1
+        fi
+    fi
     # Install Go
 
     return
-}
-
-install_vanilla() {
-    check_network
-    status=$?
-    if [ $status -eq 1 ]; then
-        echo "'archlinux.org' inaccessible. Please try again later."
-        return 1
-    else
-        if [ $status -eq 2 ]; then
-            echo "Attempting to connect to WiFi via iwd"
-            if ! wifi_connect_iwd; then
-                echo "Failed to connect to the network. Please connect and then re-run the script"
-                return 1
-            fi
-        fi 
-    fi
-
-    # Install logic here
-    install "vanilla"
-
-    return 0
-}
-
-install_t2() {
-    check_network
-    status=$?
-    if [ $status -eq 1 ]; then
-        echo "'archlinux.org' inaccessible. Please try again later."
-        return 1
-    else
-        if [ $status -eq 2 ]; then
-            echo "Attempting to connect to WiFi via nmcli"
-            if ! wifi_connect_nm; then
-                echo "Failed to connect to the network. Please connect and then re-run the script"
-                return 1
-            fi
-        fi
-    fi
-
-    # Install logic here
-    install "t2"
-
-    return 0
 }
