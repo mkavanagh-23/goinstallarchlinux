@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This script provides functions to detec and return different aspects of the current environement
+
 detect_environment() {
     # check if we are on Arch linux
     if [ -f /etc/os-release ]; then

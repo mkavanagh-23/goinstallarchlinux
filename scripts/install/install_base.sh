@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Check for a network connection, if not connected check for a wireless adapter, if present run iwctl, otherwise exit with an error, prompting user to connect to a network and try again
+# This script serves as a base entry point for the installation process
 
 install() {
     if [ $# -ne 1 ]; then

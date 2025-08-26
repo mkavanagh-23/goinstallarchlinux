@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This script handles network setup on an Arch machine
+
 HOST="archlinux.org"
 
 check_network() {

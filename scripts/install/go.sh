@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This script handles download and installation of go to /usr/local/go/bin and properly exports it to the user's path
+
 # https://go.dev/doc/install
 
 go_get() {

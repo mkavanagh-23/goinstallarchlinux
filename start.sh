@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This script bootstraps, builds and runs the overall program
+# Serves as the main entrypoint into the overall application
+
 for file in scripts/install/*.sh; do
     [ -f "$file" ] && source "$file"
 done
