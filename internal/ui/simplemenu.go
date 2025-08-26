@@ -8,14 +8,16 @@ import (
 )
 
 type simpleMenuModel struct {
+	prompt		string
 	cursor 		int
 	choices		[]string
 	selected	string
 	quit		bool
 }
 
-func newSimpleMenu(choices []string) simpleMenuModel {
+func newSimpleMenu(prompt string, choices []string) simpleMenuModel {
 	return simpleMenuModel{
+		prompt: prompt,
 		cursor: 0,
 		choices: choices,
 	}
@@ -62,11 +64,11 @@ func (m simpleMenuModel) View() string {
 		return fmt.Sprintf("You selected: %s\n", m.selected)
 	}
 
-	s := "Select an option:\n\n"
+	s := "\n" + m.prompt + "\n\n"
 	for i, choice := range m.choices {
 		cursor := " " // null cursor
 		if m.cursor == i {
-			cursor = ">"
+			cursor = "→"
 		}
 		s += fmt.Sprintf("%s %s\n", cursor, choice)
 	}
@@ -75,8 +77,8 @@ func (m simpleMenuModel) View() string {
 	return s
 }
 
-func ShowSimpleMenu(choices []string) string {
-	p := tea.NewProgram(newSimpleMenu(choices))
+func showSimpleMenu(prompt string, choices []string) string {
+	p := tea.NewProgram(newSimpleMenu(prompt, choices))
 	m, err := p.Run()
 	if err != nil {
 		fmt.Println("Error displaying menu:", err)

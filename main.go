@@ -7,14 +7,29 @@ import (
 )
 
 func main() {
+
+	// Test generation of different menu types
 	menuChoices := []string{"Choice 1", "Choice 2", "Choice 3"}
-	choice := ui.ShowSimpleMenu(menuChoices)
-	if choice != "" {
-		fmt.Printf("Your choice: %s\n", choice)
+	simplePrompt := "Select your desired option:"
+	multiPrompt := "Select your desired option(s):"
+
+	simpleReturn := ui.ShowMenu(ui.SimpleMenu, simplePrompt, menuChoices)
+	if simpleReturn[0] == "" {
+		fmt.Println("No simple choice selected.")
 	} else {
-		fmt.Println("No choice selected")
+		fmt.Println("Single choice selection:")
+		for _, value := range simpleReturn {
+			fmt.Println("-", value)
+		}
 	}
 
-	multiChoice := ui.ShowMultiMenu(menuChoices)
-	fmt.Printf("Your choices: %v\n", multiChoice)
+	multiReturn := ui.ShowMenu(ui.MultiMenu, multiPrompt, menuChoices)
+	if len(multiReturn) == 0 {
+		fmt.Println("No multiple choice selected.")
+	} else {
+		fmt.Println("Multiple choice selections:")
+		for _, value := range multiReturn {
+			fmt.Println("-", value)
+		}
+	}
 }

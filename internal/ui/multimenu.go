@@ -8,6 +8,7 @@ import (
 )
 
 type multiMenuModel struct {
+	prompt		string
 	cursor 		int
 	choices		[]string
 	selected	map[int]bool	// index --> selected
@@ -15,8 +16,9 @@ type multiMenuModel struct {
 	done 		bool
 }
 
-func newMultiMenu(choices []string) multiMenuModel {
+func newMultiMenu(prompt string, choices []string) multiMenuModel {
 	return multiMenuModel{
+		prompt: prompt,
 		cursor: 0,
 		choices: choices,
 		selected: make(map[int]bool),	
@@ -77,11 +79,11 @@ func (m multiMenuModel) View() string {
 		return fmt.Sprintf("You selected: %v\n", results)
 	}
 
-	s := "Select one or more options:\n\n"
+	s := "\n" + m.prompt + "\n\n"
 	for i, choice := range m.choices {
 		cursor := " " // null cursor
 		if m.cursor == i {
-			cursor = ">"
+			cursor = "→"
 		}
 
 		check := "[ ]"
@@ -95,8 +97,8 @@ func (m multiMenuModel) View() string {
 	return s
 }
 
-func ShowMultiMenu(choices []string) []string {
-	p := tea.NewProgram(newMultiMenu(choices))
+func showMultiMenu(prompt string, choices []string) []string {
+	p := tea.NewProgram(newMultiMenu(prompt, choices))
 	m, err := p.Run()
 	if err != nil {
 		fmt.Println("Error displaying menu:", err)
