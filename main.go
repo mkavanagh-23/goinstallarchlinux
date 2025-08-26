@@ -2,12 +2,23 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/mkavanagh-23/goinstallarchlinux/internal/ui"
 )
 
 func main() {
+	// Check for valid arguments
+	if len(os.Args) != 3 {
+		fmt.Printf("Usage: '%s [vanilla|t2] [install|postinstall]'\n", os.Args[0])
+		return
+	}
+	distroType := os.Args[1]
+	fmt.Printf("Distro type: %s\n", distroType)
+	installStage := os.Args[2]
+	fmt.Printf("Install stage: %s\n", installStage)
 
+	/******* DEBUG TESTING BELOW *******/
 	// Test generation of different menu types
 	menuChoices := []string{"Choice 1", "Choice 2", "Choice 3"}
 	simplePrompt := "Select your desired option:"
