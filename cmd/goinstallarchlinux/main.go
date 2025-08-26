@@ -5,27 +5,10 @@ import (
 	"os"
 
 	"github.com/mkavanagh-23/goinstallarchlinux/internal/ui"
-	//"github.com/mkavanagh-23/goinstallarchlinux/internal/app"
+	"github.com/mkavanagh-23/goinstallarchlinux/internal/app"
 )
 
-type distributionType uint8
-const (
-	archVanilla distributionType = iota
-	archT2
-)
-
-type installationStage uint8
-const (
-	initialInstall installationStage = iota
-	postInstall
-)
-
-type programState struct {
-	distribution	distributionType
-	stage			installationStage
-}
-
-var state programState
+var state app.ProgramState
 
 func main() {
 	// Check for valid arguments
@@ -41,25 +24,25 @@ func main() {
 	// Extract the state
 	switch distroType {
 	case "vanilla":
-		state.distribution = archVanilla
+		state.Distribution = app.ArchVanilla
 	case "t2":
-		state.distribution = archT2
+		state.Distribution = app.ArchT2
 	default:
 		fmt.Printf("Invalid distribution type provided: %s\n", distroType)
 		return
 	}
 	switch installStage {
 	case "install":
-		state.stage = initialInstall
+		state.Stage = app.InitialInstall
 	case "postinstall":
-		state.stage = postInstall
+		state.Stage = app.PostInstall
 	default:
 		fmt.Printf("Invalid installation stage provided: %s\n", installStage)
 		return
 	}
 
 	// Run the program from the current state
-	// func programRun(state programState) { }
+	app.ProgramRun(state)
 
 	/******* DEBUG TESTING BELOW *******/
 	// Test generation of different menu types
