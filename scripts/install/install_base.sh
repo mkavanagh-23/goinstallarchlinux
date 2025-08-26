@@ -19,6 +19,7 @@ install() {
         fi
     fi
 
+    # Initialize pacman keyring and update database
     # Install git
     # Install Go
     # Install installer

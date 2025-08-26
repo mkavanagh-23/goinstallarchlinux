@@ -35,7 +35,7 @@ wifi_check() {
 
 wifi_connect_iwd() {
     if wifi_check; then
-        echo "running iwctl"
+        iwctl
         check_network
         status=$?
         if status; then
@@ -48,7 +48,7 @@ wifi_connect_iwd() {
 
 wifi_connect_nm() {
     if wifi_check; then
-        echo "running Network Manager CLI"
+        nmcli
         check_network
         status=$?
         if status; then

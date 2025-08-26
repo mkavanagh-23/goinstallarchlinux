@@ -4,8 +4,14 @@
 
 # https://go.dev/doc/install
 
+gourl=""
+gopath=""
+projectgit=""
+projectpath=""
+projectrun=""
+
 go_get() {
-    # Install dependencies
+    # Install dependencies (curl/wget)
     # Download go
     echo "Downloading go..."
     return
@@ -22,7 +28,7 @@ go_install() {
 go_build() {
     # Clone the git repo
     # Enter project root
-    # buold the executable
+    # build the executable
     echo "Building installer program..."
     return
 }

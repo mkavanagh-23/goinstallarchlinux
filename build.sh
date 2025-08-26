@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This script builds an executable binary in bin/
+
 outputfile="bin/goinstallarchlinux"
 
 echo "Building project to $outputfile"
