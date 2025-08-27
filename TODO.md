@@ -1,8 +1,4 @@
 # To Do
- - Initial run as shell script which will then call the go program
- - Detect if in install environment or post-install
- - Create a state object to track preferences/selections
- - Isolate components into individual packages and shell scripts. i.e. 'package usersetup' and usersetup-1.sh and usersetup-1-packages.json, internal/install/usersetup/
  - Store configurations in a serialized format (json)
  - Menu states can also be stored as json to make menus easier to generate, instead of passing an array of strings we can simply pass the state object
 
