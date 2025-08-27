@@ -52,17 +52,9 @@ install() {
         echo "Usage: install [vanilla|t2]"
         return 1  # return an error code
     fi
-    local installType
-    installType="$1" # vanilla|t2
-
-    if [[ "$installType" == "t2" ]]; then
-        if ! net_install_t2; then
-            return 1
-        fi
-    else
-        if ! net_install_vanilla; then
-            return 1
-        fi
+    
+    if ! net_install_pre; then
+        return 1
     fi
 
     # Initialize pacman keyring and update database
