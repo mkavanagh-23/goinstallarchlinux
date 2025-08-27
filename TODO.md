@@ -3,7 +3,6 @@
  - Menu states can also be stored as json to make menus easier to generate, instead of passing an array of strings we can simply pass the state object
 
 ## Install Environment
- - Check for network conection, if not, connect with iwctl. If no wireless interface, display a prompt telling user to connect ethernet and exit.
  - Check for a Go installation, if not, set up and install go, tidy and build the program, then run it
  - Ask user if they want to partition disk. If yes, give them recommended partition layout and enter into fdisk. Remeber the disk they selected to partition for use in the next step
  - Ask user if they want to format partitions. List partitions and display in a tui menu for them to select. Upon selection, use the partition in another menu to select format. Since this is opinionated we can likely ask which drives to use for root, efi, and swap, and give the option for /home

@@ -26,10 +26,10 @@ wifi_check() {
     echo "Checking for wireless adapters..."
     wireless_interfaces=$(iw dev 2>/dev/null | grep Interface | awk '{print $2}')
     if [ -z "$wireless_interfaces" ]; then
-        echo "❌ No wireless adapters found."
+        echo "❌ No wireless network adapters found."
         return 1
     else
-        echo "✅ Wireless adapter found."
+        echo "✅ Wireless network adapter found."
         echo
         return 0
     fi
@@ -40,7 +40,7 @@ wifi_connect_iwd() {
         echo "Attempting to connect to Wi-Fi via iwctl"
         echo
         echo "*************************************************************"
-        echo "*       Please connect to Wi-fi and then enter 'exit'        *"
+        echo "*       Please connect to Wi-fi and then enter 'exit'       *"
         echo "* https://wiki.archlinux.org/title/Iwd#Connect_to_a_network *"
         echo "*************************************************************"
         echo
@@ -95,7 +95,7 @@ net_install_pre() {
         return 1
     elif [ $status -eq 2 ]; then 
         if ! wifi_connect_iwd; then
-            echo "Failed to connect to the network. Please connect and then re-run the script"
+            echo "Failed to connect to the network. Please connect to the internet and then re-run the script"
             return 1
         fi
     fi
