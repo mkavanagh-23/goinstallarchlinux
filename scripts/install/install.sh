@@ -3,6 +3,7 @@
 # This script serves as a base entry point for the installation process
 
 install_gum() {
+    local log_file="/var/log/goinstallarchlinux"
     # Check if gum is installed
     if ! command -v gum &>/dev/null; then
         echo "gum not found. Installing..."
@@ -10,7 +11,7 @@ install_gum() {
             echo "Failed to install gum"
             return 1
         }
-        mkdir -p /var/log/goinstallarchlinux
+        mkdir -p "$log_file"
     else
         echo "gum is already installed."
     fi
