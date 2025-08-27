@@ -4,6 +4,7 @@
 # Serves as the main entrypoint into the overall application
 
 set -euo pipefail
+log_file="/var/log/goinstallarchlinux/bash.log"
 
 for file in scripts/install/*.sh; do
     [ -f "$file" ] && source "$file"

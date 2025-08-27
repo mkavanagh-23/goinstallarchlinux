@@ -3,7 +3,7 @@
 gum_log() {
     # Must have at least 2 arguments: loglevel + message
     if [ $# -lt 2 ]; then
-        echo "Usage: gum_log [filepath] <loglevel> <logmessage> [key value]..."
+        echo "Usage: gum_log <loglevel> <logmessage> [key value]..."
         return 1
     fi
 
@@ -47,8 +47,6 @@ log_to_console() {
 }
 
 log_to_file() {
-    log_file="/var/log/goinstallarchlinux/bash.log"
-    shift
     gum_log "$@" || return 1 
     {
         gum log "${_GUM_LOG_ARGS[@]}" 
