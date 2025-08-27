@@ -37,7 +37,8 @@ wifi_connect_iwd() {
     if wifi_check; then
         iwctl
         check_network
-        local status=$?
+        local status
+        status=$?
         if status; then
             echo "✅ WiFi successfully connected!"
             return 0
@@ -50,7 +51,8 @@ wifi_connect_nm() {
     if wifi_check; then
         nmcli
         check_network
-        local status=$?
+        local status
+        status=$?
         if status; then
             echo "✅ WiFi successfully connected!"
             return 0
@@ -61,7 +63,8 @@ wifi_connect_nm() {
 
 net_install_vanilla() {
     check_network
-    local status=$?
+    local status
+    status=$?
     if [ $status -eq 1 ]; then
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1
@@ -80,7 +83,8 @@ net_install_vanilla() {
 
 net_install_t2() {
     check_network
-    local status=$?
+    local status
+    status=$?
     if [ $status -eq 1 ]; then
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1

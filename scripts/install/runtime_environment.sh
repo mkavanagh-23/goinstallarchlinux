@@ -26,7 +26,8 @@ detect_environment() {
 }
 
 detect_t2() {
-    local kernel_release=$(uname -r)
+    local kernel_release
+    kernel_release=$(uname -r)
     shopt -s nocasematch
     if [[ "$kernel_release" == *t2* ]]; then
         echo "t2"
