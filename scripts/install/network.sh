@@ -5,7 +5,6 @@
 TEST_HOST="archlinux.org"
 
 check_network() {
-    echo "Starting 'check_network'"
     echo "Checking internet connectivity..."
 
     if ping -c 1 -W 2 "$TEST_HOST" &> /dev/null; then
@@ -23,7 +22,6 @@ check_network() {
 }
 
 wifi_check() {
-    echo "Starting 'wifi_check'"
     echo "Checking for wireless adapters..."
     wireless_interfaces=$(iw dev 2>/dev/null | grep Interface | awk '{print $2}')
     if [ -z "$wireless_interfaces" ]; then
@@ -36,8 +34,9 @@ wifi_check() {
 }
 
 wifi_connect_iwd() {
-    echo "Starting 'wifi_connect_iwd'"
     if wifi_check; then
+        echo "Please connect to Wifi and then enter 'exit':"
+        echo
         iwctl
         check_network
         local status=$?
@@ -50,7 +49,6 @@ wifi_connect_iwd() {
 }
 
 wifi_connect_nm() {
-    echo "Starting 'wifi_connect_nm'"
     if wifi_check; then
         nmcli
         check_network
@@ -64,7 +62,7 @@ wifi_connect_nm() {
 }
 
 net_install_post() {
-    echo "Starting 'net_install_vanilla'"
+    echo "Starting 'net_install_post'"
     check_network
     local status=$?
     if [ $status -eq 1 ]; then
@@ -72,6 +70,7 @@ net_install_post() {
         return 1
     elif [ $status -eq 2 ]; then
         echo "Attempting to connect to WiFi via nmcli"
+        echo
         if ! wifi_connect_nm; then
             echo "Failed to connect to the network. Please connect and then re-run the script"
             return 1
@@ -82,7 +81,7 @@ net_install_post() {
 }
 
 net_install_pre() {
-    echo "Starting 'net_install_t2'"
+    echo "Starting 'net_install_pre'"
     check_network
     local status=$?
     if [ $status -eq 1 ]; then
@@ -90,6 +89,7 @@ net_install_pre() {
         return 1
     elif [ $status -eq 2 ]; then
         echo "Attempting to connect to WiFi via iwctl"
+        echo
         if ! wifi_connect_iwd; then
             echo "Failed to connect to the network. Please connect and then re-run the script"
             return 1
