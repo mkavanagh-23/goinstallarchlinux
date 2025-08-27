@@ -3,6 +3,8 @@
 # This script bootstraps, builds and runs the overall program
 # Serves as the main entrypoint into the overall application
 
+set -euo pipefail
+
 for file in scripts/install/*.sh; do
     [ -f "$file" ] && source "$file"
 done

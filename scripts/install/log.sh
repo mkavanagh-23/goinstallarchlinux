@@ -47,7 +47,7 @@ log_to_console() {
 }
 
 log_to_file() {
-    local log_file="/var/log/goinstallarchlinux/bash.log"
+    log_file="/var/log/goinstallarchlinux/bash.log"
     shift
     gum_log "$@" || return 1 
     {

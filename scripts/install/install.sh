@@ -3,7 +3,6 @@
 # This script serves as a base entry point for the installation process
 
 install_gum() {
-    pacman -Sy
     # Check if gum is installed
     if ! command -v gum &>/dev/null; then
         echo "gum not found. Installing..."
@@ -11,15 +10,17 @@ install_gum() {
             echo "Failed to install gum"
             return 1
         }
+        mkdir -p /var/log/goinstallarchlinux
     else
         echo "gum is already installed."
     fi
+    log_to_file info "Successful gum installation located. Starting logging..." "logfile" "$log_file"
 }
 
-install_package() {
-    pacman -Sy
+install_package_pacman() {
     if [ $# -lt 1 ]; then
         echo "Usage: install_package [<pkgname> ...]"
+        log_to_file error "Function 'install_package' called with no arguments" "argc" $#
         return 1  # return an error code
     fi
     
@@ -27,17 +28,20 @@ install_package() {
     local missing=()
     for pkg in "$@"; do
         if ! pacman -Q "$pkg" &>/dev/null; then
+            log_to_file debug "Package not found. Adding to install list" "pkg" "$pkg"
             missing+=("$pkg")
         else
-            echo "$pkg is already installed."
+            log_to_file debug "Package already installed" "pkg" "$pkg"
         fi
     done
 
     # Install all missing packages at once
     if [ ${#missing[@]} -gt 0 ]; then
         echo "Installing missing packages: ${missing[*]}"
+        log_to_file info "Installing missing packages: ${missing[*]}"
         sudo pacman -S --noconfirm "${missing[@]}" || {
-            echo "Failed to install some packages"
+            echo "Error installing packages"
+            log_to_file error "Failed to install some packages"
             return 1
         }
     fi
