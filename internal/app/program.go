@@ -52,7 +52,7 @@ func debugUI() {
 	}
 }
 
-func ProgramRun(state ProgramState) error {
+func Run(state ProgramState) error {
 	fmt.Println("Successfully started program.")
 	// Run the installer
 	debugUI()

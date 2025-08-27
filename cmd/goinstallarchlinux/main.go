@@ -17,7 +17,7 @@ func main() {
 	}
 
 	// Main program entry point
-	if err := app.ProgramRun(state); err != nil {
+	if err := app.Run(state); err != nil {
 		fmt.Fprintln(os.Stderr, "Program failed:", err)
 		os.Exit(1)
 	}
