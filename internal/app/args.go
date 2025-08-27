@@ -3,14 +3,14 @@ package app
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 // ParseArgs takes CLI args and converts them into a ProgramState.
 func ParseArgs(args []string) (ProgramState, error) {
 	if len(args) != 3 {
-		return ProgramState{}, fmt.Errorf(
-			"usage: '%s [vanilla|t2] [install|postinstall]'", args[0],
-		)
+		fmt.Printf("usage: '%s [vanilla|t2] [install|postinstall]'\n", args[0])
+		return ProgramState{}, errors.New("Invalid number of arguments: " + strconv.Itoa(len(args)))
 	}
 
 	// Create a state object
