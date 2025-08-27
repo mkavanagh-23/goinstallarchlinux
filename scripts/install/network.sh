@@ -38,7 +38,7 @@ wifi_connect_iwd() {
         iwctl
         check_network
         local status=$?
-        if status; then
+        if [ $status -eq 0 ]; then
             echo "✅ WiFi successfully connected!"
             return 0
         fi
@@ -51,7 +51,7 @@ wifi_connect_nm() {
         nmcli
         check_network
         local status=$?
-        if status; then
+        if [ $status -eq 0 ]; then
             echo "✅ WiFi successfully connected!"
             return 0
         fi
