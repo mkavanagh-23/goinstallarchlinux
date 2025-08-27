@@ -10,7 +10,7 @@ import (
 func ParseArgs(args []string) (ProgramState, error) {
 	if len(args) != 3 {
 		fmt.Printf("usage: '%s [vanilla|t2] [install|postinstall]'\n", args[0])
-		return ProgramState{}, errors.New("Invalid number of arguments: " + strconv.Itoa(len(args)))
+		return ProgramState{}, errors.New("Invalid number of arguments: " + strconv.Itoa(len(args)-1))
 	}
 
 	// Create a state object
