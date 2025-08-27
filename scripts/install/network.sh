@@ -2,12 +2,12 @@
 
 # This script handles network setup on an Arch machine
 
-HOST="archlinux.org"
+TEST_HOST="archlinux.org"
 
 check_network() {
     echo "Checking internet connectivity..."
 
-    if ping -c 1 -W 2 "$HOST" &> /dev/null; then
+    if ping -c 1 -W 2 "$TEST_HOST" &> /dev/null; then
         echo "✅ Connected to the internet."
         return 0
     else
@@ -37,7 +37,7 @@ wifi_connect_iwd() {
     if wifi_check; then
         iwctl
         check_network
-        status=$?
+        local status=$?
         if status; then
             echo "✅ WiFi successfully connected!"
             return 0
@@ -50,7 +50,7 @@ wifi_connect_nm() {
     if wifi_check; then
         nmcli
         check_network
-        status=$?
+        local status=$?
         if status; then
             echo "✅ WiFi successfully connected!"
             return 0
@@ -61,7 +61,7 @@ wifi_connect_nm() {
 
 net_install_vanilla() {
     check_network
-    status=$?
+    local status=$?
     if [ $status -eq 1 ]; then
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1
@@ -80,7 +80,7 @@ net_install_vanilla() {
 
 net_install_t2() {
     check_network
-    status=$?
+    local status=$?
     if [ $status -eq 1 ]; then
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1

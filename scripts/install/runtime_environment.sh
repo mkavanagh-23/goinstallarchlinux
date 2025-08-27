@@ -26,12 +26,13 @@ detect_environment() {
 }
 
 detect_t2() {
-    kernel_name=$(uname -s)
-    if [ "${kernel_name,,}" = "arch-t2" ]; then
+    local kernel_release=$(uname -r)
+    shopt -s nocasematch
+    if [[ "$kernel_release" == *t2* ]]; then
         echo "t2"
-        return
+    else
+        echo "vanilla"
     fi
-
-    echo "vanilla"
+    shopt -u nocasematch
     return
 }
