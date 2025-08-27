@@ -8,20 +8,20 @@ import (
 )
 
 type multiMenuModel struct {
-	prompt		string
-	cursor 		int
-	choices		[]string
-	selected	map[int]bool	// index --> selected
-	quit		bool
-	done 		bool
+	prompt   string
+	cursor   int
+	choices  []string
+	selected map[int]bool // index --> selected
+	quit     bool
+	done     bool
 }
 
 func newMultiMenu(prompt string, choices []string) multiMenuModel {
 	return multiMenuModel{
-		prompt: prompt,
-		cursor: 0,
-		choices: choices,
-		selected: make(map[int]bool),	
+		prompt:   prompt,
+		cursor:   0,
+		choices:  choices,
+		selected: make(map[int]bool),
 	}
 }
 
@@ -33,7 +33,7 @@ func (m multiMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 
 	case tea.KeyMsg:
-	switch msg.String() {
+		switch msg.String() {
 
 		case "ctrl+c", "q":
 			m.quit = true
@@ -59,7 +59,7 @@ func (m multiMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter":
 			m.done = true
 			return m, tea.Quit
-	}
+		}
 	}
 	return m, nil
 }
@@ -97,6 +97,8 @@ func (m multiMenuModel) View() string {
 	return s
 }
 
+// TODO:
+// Refactor to return an error instead of early exit
 func showMultiMenu(prompt string, choices []string) []string {
 	p := tea.NewProgram(newMultiMenu(prompt, choices))
 	m, err := p.Run()
@@ -116,6 +118,6 @@ func showMultiMenu(prompt string, choices []string) []string {
 			results = append(results, choice)
 		}
 	}
-	
+
 	return results
 }

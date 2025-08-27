@@ -8,17 +8,17 @@ import (
 )
 
 type simpleMenuModel struct {
-	prompt		string
-	cursor 		int
-	choices		[]string
-	selected	string
-	quit		bool
+	prompt   string
+	cursor   int
+	choices  []string
+	selected string
+	quit     bool
 }
 
 func newSimpleMenu(prompt string, choices []string) simpleMenuModel {
 	return simpleMenuModel{
-		prompt: prompt,
-		cursor: 0,
+		prompt:  prompt,
+		cursor:  0,
 		choices: choices,
 	}
 }
@@ -31,7 +31,7 @@ func (m simpleMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 
 	case tea.KeyMsg:
-	switch msg.String() {
+		switch msg.String() {
 
 		case "ctrl+c", "q":
 			m.quit = true
@@ -50,11 +50,13 @@ func (m simpleMenuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter":
 			m.selected = m.choices[m.cursor]
 			return m, tea.Quit
-	}
+		}
 	}
 	return m, nil
 }
 
+// TODO:
+// Update index looping to carry-over from top to bottom
 func (m simpleMenuModel) View() string {
 	if m.quit && m.selected == "" {
 		return "Exiting program. Goodbye!\n"
@@ -77,6 +79,8 @@ func (m simpleMenuModel) View() string {
 	return s
 }
 
+// TODO:
+// Refactor to return an error instead of early exit
 func showSimpleMenu(prompt string, choices []string) string {
 	p := tea.NewProgram(newSimpleMenu(prompt, choices))
 	m, err := p.Run()
