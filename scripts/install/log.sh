@@ -50,5 +50,5 @@ log_to_file() {
     gum_log "$@" || return 1 
     {
         gum log "${_GUM_LOG_ARGS[@]}" 
-    } >> "$log_file" 2>&1
+    } >> "$log_dir/$log_file" 2>&1
 }

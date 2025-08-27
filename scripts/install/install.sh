@@ -10,11 +10,11 @@ install_gum() {
             echo "Failed to install gum"
             return 1
         }
-        mkdir -p "$log_file"
     else
         echo "gum is already installed."
     fi
-    log_to_file info "Successful gum installation located. Starting logging..." "logfile" "$log_file"
+    mkdir -p "$log_dir"
+    log_to_file info "Successful gum installation located. Starting logging..." "logfile" "$log_dir/$log_file"
 }
 
 install_package_pacman() {
