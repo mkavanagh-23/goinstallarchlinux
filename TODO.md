@@ -1,6 +1,7 @@
 # To Do
  - Store configurations in a serialized format (json)
  - Menu states can also be stored as json to make menus easier to generate, instead of passing an array of strings we can simply pass the state object
+ - Dotfiles installer should function as a standalone programmed called by this one at the end
 
 ## Install Environment
  - Check for a Go installation, if not, set up and install go, tidy and build the program, then run it

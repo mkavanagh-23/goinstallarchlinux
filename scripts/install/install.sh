@@ -65,10 +65,22 @@ install() {
         return 1
     fi
 
-    # Install git
-    # Install Go
-    # Install installer
-    # Run installer
-
     return
+}
+
+post_install() {
+
+    if [ $# -ne 1 ]; then
+        echo "Usage: post_install [vanilla|t2]"
+        return 1  # return an error code
+    fi
+
+    # Check if we are running as user/root account
+    # Check if we have sudo access
+
+    if ! net_install_post; then
+        return 1
+    fi
+
+    # Initialize and update pacman
 }
