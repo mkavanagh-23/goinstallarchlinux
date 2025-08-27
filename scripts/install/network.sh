@@ -35,7 +35,9 @@ wifi_check() {
 
 wifi_connect_iwd() {
     if wifi_check; then
-        echo "Please connect to Wifi and then enter 'exit':"
+        echo
+        echo "Please connect to Wifi and then enter 'exit'"
+        echo "https://wiki.archlinux.org/title/Iwd#Connect_to_a_network"
         echo
         iwctl
         check_network
