@@ -14,7 +14,7 @@ install_gum() {
         echo "gum is already installed."
     fi
     mkdir -p "$log_dir"
-    log_to_file info "Successful gum installation located. Starting logging..." "logfile" "$log_dir/$log_file"
+    log_to_both info "Successful gum installation located. Starting logging..." "logfile" "$log_dir/$log_file"
 }
 
 install_package_pacman() {

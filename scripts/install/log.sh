@@ -52,3 +52,20 @@ log_to_file() {
         gum log "${_GUM_LOG_ARGS[@]}" 
     } >> "$log_dir/$log_file" 2>&1
 }
+
+log_to_both() {
+    # Call log_to_console first
+    log_to_console "$@"
+    local status_console=$?
+
+    # Call log_to_file next
+    log_to_file "$@"
+    local status_file=$?
+
+    # Return non-zero if either failed
+    if (( status_console != 0 || status_file != 0 )); then
+        return 1
+    fi
+
+    return 0
+}
