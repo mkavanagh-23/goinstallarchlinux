@@ -5,6 +5,7 @@
 TEST_HOST="archlinux.org"
 
 check_network() {
+    echo
     echo "Checking internet connectivity..."
 
     if ping -c 1 -W 2 "$TEST_HOST" &> /dev/null; then
@@ -77,7 +78,6 @@ net_install_post() {
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1
     elif [ $status -eq 2 ]; then
-        echo
         if ! wifi_connect_nm; then
             echo "Failed to connect to the network. Please connect and then re-run the script"
             return 1
@@ -94,7 +94,6 @@ net_install_pre() {
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1
     elif [ $status -eq 2 ]; then 
-        echo
         if ! wifi_connect_iwd; then
             echo "Failed to connect to the network. Please connect and then re-run the script"
             return 1

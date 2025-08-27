@@ -13,6 +13,7 @@ done
 
 main() {
     echo "=== Arch Linux Environment Detection ==="
+    echo
     env_status=$(detect_environment)
     case "$env_status" in
       "installer")
