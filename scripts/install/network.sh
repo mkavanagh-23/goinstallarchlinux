@@ -29,18 +29,21 @@ wifi_check() {
         return 1
     else
         echo "✅ Wireless adapter found."
+        echo
         return 0
     fi
 }
 
 wifi_connect_iwd() {
     if wifi_check; then
+        echo "Attempting to connect to Wi-Fi via iwctl"
         echo
         echo "*************************************************************"
-        echo "*       Please connect to Wifi and then enter 'exit'        *"
+        echo "*       Please connect to Wi-fi and then enter 'exit'        *"
         echo "* https://wiki.archlinux.org/title/Iwd#Connect_to_a_network *"
         echo "*************************************************************"
         echo
+
         iwctl
         check_network
         local status=$?
@@ -54,6 +57,8 @@ wifi_connect_iwd() {
 
 wifi_connect_nm() {
     if wifi_check; then
+        echo "Attempting to connect to WiFi via nmcli"
+        echo
         nmcli
         check_network
         local status=$?
@@ -66,14 +71,12 @@ wifi_connect_nm() {
 }
 
 net_install_post() {
-    echo "Starting 'net_install_post'"
     check_network
     local status=$?
     if [ $status -eq 1 ]; then
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1
     elif [ $status -eq 2 ]; then
-        echo "Attempting to connect to WiFi via nmcli"
         echo
         if ! wifi_connect_nm; then
             echo "Failed to connect to the network. Please connect and then re-run the script"
@@ -85,14 +88,12 @@ net_install_post() {
 }
 
 net_install_pre() {
-    echo "Starting 'net_install_pre'"
     check_network
     local status=$?
     if [ $status -eq 1 ]; then
         echo "'archlinux.org' inaccessible. Please try again later."
         return 1
-    elif [ $status -eq 2 ]; then
-        echo "Attempting to connect to WiFi via iwctl"
+    elif [ $status -eq 2 ]; then 
         echo
         if ! wifi_connect_iwd; then
             echo "Failed to connect to the network. Please connect and then re-run the script"
