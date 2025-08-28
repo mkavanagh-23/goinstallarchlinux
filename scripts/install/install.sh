@@ -61,9 +61,37 @@ install() {
     pacman -Sy
 
     # Install gum before installing the rest
+    # This is used to facilitate logging and tui elements
     if ! install_gum; then
         return 1
     fi
+
+    # FILESYSTEM.sh
+    # 1. Partition 
+    # 2. Format
+    # 3. Mount
+
+    # PACSTRAP.sh
+    # 1. Rank mirrors
+    # 2. Pacstrap the install (*T2 opts)
+    # 3. pacman config (add T2 repo)
+    # 4. Addtl packages (maybe?)
+    # 5. genfstab
+
+    # CHROOT.sh
+    # 1. arch-chroot
+    # 2. Set clocks
+    # 3. Generate locales
+    # DONE 4. Set the hostname
+    # 5. Set the root pw
+    # 6. Create a sudo user
+    # 7. (*T2) Enable the fan daemon
+    # 8. grub
+
+    # POSTINSTALL.sh
+    # 1. Copy over log file
+    # 2. Build and install installer program
+    # 3. Reboot
 
     return
 }

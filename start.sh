@@ -3,6 +3,8 @@
 # This script bootstraps, builds and runs the overall program
 # Serves as the main entrypoint into the overall application
 
+DRY_RUN=0
+
 set -euo pipefail
 log_dir="/var/log/goinstallarchlinux"
 log_file="bash.log"
